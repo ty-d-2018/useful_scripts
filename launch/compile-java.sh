@@ -1,8 +1,9 @@
 #!/bin/bash
 
-javaPath="./io/github/tyd2018"
-mainClass="$2"
-projectName="$1"
+rootFolderPath="$1"
+javaPath="${1}/io/github/tyd2018"
+mainClass="$3"
+projectName="$2"
 packageName="io.github.tyd2018.${projectName}"
 
 echo "compiling Java source files"
