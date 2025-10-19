@@ -1,0 +1,10 @@
+{
+    "paths": {
+        "SUB": [{"folder": "auto-utility"}, {"folder": "launch"}, {"folder": "packages"}, {"folder": "projects"}],
+        "exec_tag_line": ["export", "#SPACE", "PATH", "=", "#QUOTE", "$", "PATH", ":", "#BIN", "/", "#REPO", "/", "#SUB", "#QUOTE"],
+        "QUOTE": "\"",
+        "SPACE": " ",
+        "BIN": "${HOME}/bin",
+        "REPO": "useful_scripts"
+    }
+}
