@@ -18,6 +18,9 @@ class Script:
                 bf.write(line)
     
     def get_commands(self):
+        if self.json is None:
+            self.read_json()
+        
         paths = self.json["paths"]
         tags = paths["exec_tag_line"]
         sub = paths["SUB"]
@@ -29,10 +32,22 @@ class Script:
             "#SPACE": "",
             "#BIN": "$HOME/bin",
             "#REPO": "useful_scripts",
-            "#SUB": sub
         }
 
         for tag in tags:
             if tag in keys:
-                
+                command.append(keys[tag])
+            elif tag == "#SUB":
+                i = len(command)
+                command.append("sub")
+            else:
+                command.append(tag)
 
+        export_strings = []
+
+        for sub_directory in sub:
+            command[i] = sub_directory["folder"]
+            export_strings.append(command)
+        
+
+        return export_strings
