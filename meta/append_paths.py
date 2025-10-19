@@ -47,7 +47,7 @@ class Script:
 
         for sub_directory in sub:
             command[i] = sub_directory["folder"]
-            export_strings.append(command)
+            export_strings.append("".join(command))
         
 
         return export_strings
