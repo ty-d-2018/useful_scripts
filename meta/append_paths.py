@@ -1,6 +1,24 @@
 from pathlib import Path
 import json
 
+def get_list(self):
+    command = []
+
+    def append_to_command(value):
+        nonlocal command.append(value)
+
+    def get_command(i):
+        nonlocal command[i]
+
+    def set_command(i, value):
+        nonlocal command[i] = value
+
+    def get_whole_command():
+        return nonlocal command
+
+    return append_to_command, get_command, set_command, get_whole_command
+
+
 class Script:
     def __init__(self):
         self.source = Path(__file__).resolve().parent
@@ -25,23 +43,6 @@ class Script:
             "#BIN": "$HOME/bin",
             "#REPO": "useful_scripts",
         }
-
-    def get_command(self):
-        command = []
-
-        def append_to_command(value):
-            nonlocal command.append(value)
-
-        def get_command(i):
-            nonlocal command[i]
-
-        def set_command(i, value):
-            nonlocal command[i] = value
-
-        def get_whole_command():
-            return nonlocal command
-
-        return append_to_command, get_command, set_command, get_whole_command
     
     def get_commands(self):
         if self.json is None:
@@ -50,25 +51,24 @@ class Script:
         paths = self.json["paths"]
         tags = paths["exec_tag_line"]
         sub = paths["SUB"]
-        command = []
         i = 0
 
-        add, get_index, set_index, get_whole = self.get_command()
+        tag_add, _, tag_set_index, tag_get_whole = get_list()
+        export_add, _, _, export_get_whole = get_list()
+
 
         for tag in tags:
             if tag in self.keys:
-                add(keys[tag])
+                tag_add(keys[tag])
             elif tag == "#SUB":
                 i = len(command)
-                add("sub")
+                tag_add("sub")
             else:
-                add(tag)
-
-        export_strings = []
+                tag_add(tag)
 
         for sub_directory in sub:
-            set_index(i, sub_directory["folder"])
-            export_strings.append("".join(get_whole()))
+            tag_set_index(i, sub_directory["folder"])
+            export_add("".join(tag_get_whole()))
         
 
-        return export_strings
+        return export_get_whole()
