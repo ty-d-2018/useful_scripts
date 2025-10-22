@@ -26,11 +26,22 @@ class Script:
             "#REPO": "useful_scripts",
         }
 
-    def get_command(self, command, value):
+    def get_command(self):
         command = []
 
         def append_to_command(value):
             nonlocal command.append(value)
+
+        def get_command(i):
+            nonlocal command[i]
+
+        def set_command(i, value):
+            nonlocal command[i] = value
+
+        def get_whole_command():
+            return nonlocal command
+
+        return append_to_command, get_command, set_command, get_whole_command
     
     def get_commands(self):
         if self.json is None:
@@ -42,20 +53,22 @@ class Script:
         command = []
         i = 0
 
+        add, get_index, set_index, get_whole = self.get_command()
+
         for tag in tags:
             if tag in self.keys:
-                command.append(keys[tag])
+                add(keys[tag])
             elif tag == "#SUB":
                 i = len(command)
-                command.append("sub")
+                add("sub")
             else:
-                command.append(tag)
+                add(tag)
 
         export_strings = []
 
         for sub_directory in sub:
-            command[i] = sub_directory["folder"]
-            export_strings.append("".join(command))
+            set_index(i, sub_directory["folder"])
+            export_strings.append("".join(get_whole()))
         
 
         return export_strings
