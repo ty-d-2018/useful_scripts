@@ -5,7 +5,7 @@ class Script:
     def __init__(self):
         self.source = Path(__file__).resolve().parent
         self.config = (d / "../config/home_bin_bash_rc.json")
-        self.json = None
+        self.json = {}
         self.bash_rc = (Path.home() / ".bashrc").resolve()
         self.keys = self.setup_keys()
 
