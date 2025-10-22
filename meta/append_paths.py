@@ -109,3 +109,12 @@ class Script:
         
 
         return export_get_whole()
+
+    def act(self):
+        self.read_json()
+        commands = self.get_commands()
+        self.write_bash_rc(commands)
+
+    
+    script = Script(target_config=".test_bash_rc_cpy")
+    script.act()
