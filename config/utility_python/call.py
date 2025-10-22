@@ -23,3 +23,6 @@ class CallingCommand:
         result = self.execute_command(self.commands[i])
 
         return result
+
+    def get_commands(self):
+        return self.commands
