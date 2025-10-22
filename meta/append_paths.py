@@ -55,11 +55,11 @@ class Source:
 
 
 class Script:
-    def __init__(self):
+    def __init__(self, target_config=".bashrc"):
         self.script_path = Path(__file__).resolve().parent
         self.config = Source(script_path, "../config/home_bin_bash_rc.json")
         self.json = {}
-        self.bash_rc = Source(Path.home(), ".bashrc")
+        self.bash_rc = Source(Path.home(), target_config)
         self.keys = self.setup_keys()
 
     def read_json(self):
