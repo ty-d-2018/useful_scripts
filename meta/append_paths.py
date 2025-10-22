@@ -18,23 +18,48 @@ def get_list(self):
 
     return append_to_command, get_command, set_command, get_whole_command
 
+class Source:
+    def __init__(self, source_path, relative_path):
+        self.path = (source_path / relative_path).resolve()
+        self.content = ""
+
+    def read_file(self):
+        self.content = self.path.read_text()
+
+    def write_file(self):
+        self.path.write_text(self.content)
+
+    def append_file(self):
+        with self.path.open(mode='a') as f:
+            f.write(self.content)
+
+    def get_content(self):
+        return self.content
+
+    def set_content(self, text):
+        self.content = text
+
+    def append_content(self, text):
+        self.content = f"{self.content}{text}"
+
 
 class Script:
     def __init__(self):
-        self.source = Path(__file__).resolve().parent
-        self.config = (d / "../config/home_bin_bash_rc.json")
+        self.script_path = Path(__file__).resolve().parent
+        self.config = Source(script_path, "../config/home_bin_bash_rc.json")
         self.json = {}
-        self.bash_rc = (Path.home() / ".bashrc").resolve()
+        self.bash_rc = Source(Path.home(), ".bashrc")
         self.keys = self.setup_keys()
 
     def read_json(self):
-        with open(self.config, 'r') as jf:
-            self.json = json.load(jf)
+        self.json = json.load(self.config.read_file().get_content())
 
     def write_bash_rc(self, commands):
-        with open(self.bash_rc, 'a') as bf:
-            for line in commands:
-                bf.write(line)
+        self.bash_rc.set_content("")
+        for line in commands:
+            self.bash_rc.append_content(line)
+
+        self.bash_rc.append_file()
 
     def setup_keys(self):
         return {
