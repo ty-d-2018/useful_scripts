@@ -1,20 +1,20 @@
 from pathlib import Path
 import json
 
-def get_list(self):
+def get_list():
     command = []
 
     def append_to_command(value):
-        nonlocal command.append(value)
+        command.append(value)
 
     def get_command(i):
-        nonlocal command[i]
+        command[i]
 
     def set_command(i, value):
-        nonlocal command[i] = value
+        command[i] = value
 
     def get_whole_command():
-        return nonlocal command
+        return command
 
     return append_to_command, get_command, set_command, get_whole_command
 
@@ -28,7 +28,7 @@ class Source:
         return file_content
 
     def read_and_set_content(self):
-        self.content = read_file()
+        self.content = self.read_file()
 
     def write_file(self):
         self.path.write_text(self.content)
@@ -43,8 +43,8 @@ class Source:
     def set_content(self, text):
         self.content = text
 
-    def append_content(self, text):
-        self.content = f"{self.content}{text}"
+    def append_content(self, text, seperator=""):
+        self.content = f"{self.content}{text}{seperator}"
 
     def is_in_file(self, query):
         file_content = self.read_file()
@@ -57,27 +57,29 @@ class Source:
 class Script:
     def __init__(self, target_config=".bashrc"):
         self.script_path = Path(__file__).resolve().parent
-        self.config = Source(script_path, "../config/home_bin_bash_rc.json")
+        self.config = Source(self.script_path, "../config/home_bin_bash_rc.json")
         self.json = {}
         self.bash_rc = Source(Path.home(), target_config)
         self.keys = self.setup_keys()
 
     def read_json(self):
-        self.json = json.load(self.config.read_and_set_content().get_content())
+        self.config.read_and_set_content()
+        self.json = json.loads(self.config.get_content())
 
     def write_bash_rc(self, commands):
         self.bash_rc.set_content("")
         for line in commands:
-            self.bash_rc.append_content(line)
+            self.bash_rc.append_content(line, "\n")
 
-        if not bash_rc.is_in_file(self.bas_rc.get_content()):
+        if not self.bash_rc.is_in_file(self.bash_rc.get_content()):
+            print("appending to .bash_rc")
             self.bash_rc.append_file()
 
     def setup_keys(self):
         return {
             "#QUOTE": "\"",
-            "#SPACE": "",
-            "#BIN": "$HOME/bin",
+            "#SPACE": " ",
+            "#BIN": "${HOME}/bin/github_repos",
             "#REPO": "useful_scripts",
         }
     
@@ -96,9 +98,9 @@ class Script:
 
         for tag in tags:
             if tag in self.keys:
-                tag_add(keys[tag])
+                tag_add(self.keys[tag])
             elif tag == "#SUB":
-                i = len(command)
+                i = len(tag_get_whole())
                 tag_add("sub")
             else:
                 tag_add(tag)
@@ -116,5 +118,5 @@ class Script:
         self.write_bash_rc(commands)
 
     
-    script = Script(target_config=".test_bash_rc_cpy")
-    script.act()
+script = Script()
+script.act()
