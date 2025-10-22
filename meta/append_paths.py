@@ -25,6 +25,12 @@ class Script:
             "#BIN": "$HOME/bin",
             "#REPO": "useful_scripts",
         }
+
+    def get_command(self, command, value):
+        command = []
+
+        def append_to_command(value):
+            nonlocal command.append(value)
     
     def get_commands(self):
         if self.json is None:
