@@ -24,7 +24,11 @@ class Source:
         self.content = ""
 
     def read_file(self):
-        self.content = self.path.read_text()
+        file_content = self.path.read_text()
+        return file_content
+
+    def read_and_set_content(self):
+        self.content = read_file()
 
     def write_file(self):
         self.path.write_text(self.content)
@@ -42,6 +46,13 @@ class Source:
     def append_content(self, text):
         self.content = f"{self.content}{text}"
 
+    def is_in_file(self, query):
+        file_content = self.read_file()
+        if query in file_content:
+            return True
+        return False
+
+
 
 class Script:
     def __init__(self):
@@ -52,14 +63,15 @@ class Script:
         self.keys = self.setup_keys()
 
     def read_json(self):
-        self.json = json.load(self.config.read_file().get_content())
+        self.json = json.load(self.config.read_and_set_content().get_content())
 
     def write_bash_rc(self, commands):
         self.bash_rc.set_content("")
         for line in commands:
             self.bash_rc.append_content(line)
 
-        self.bash_rc.append_file()
+        if not bash_rc.is_in_file(self.bas_rc.get_content()):
+            self.bash_rc.append_file()
 
     def setup_keys(self):
         return {
