@@ -22,7 +22,7 @@ class Blocks(Argument):
 
     def loop_blocks(self, action):
         block = self.get_block()
-        while block is not None:
+        while self.i > 0:
             action(block)
             block = self.get_block()
 
