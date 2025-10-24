@@ -26,10 +26,10 @@ class Blocks(Argument):
         else:
             self.i = self.i + 1
 
-    def loop_blocks(self, action):
+    def loop_blocks(self, activity):
         name, block = self.get_block()
         while self.i > 0:
-            action(name, block)
+            activity(name, block)
             name, block = self.get_block()
 
     def is_empty(self):
