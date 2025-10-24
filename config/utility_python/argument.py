@@ -9,3 +9,6 @@ class Argument:
 
     def get_option(self, name):
         option_value = getattr(self.param_keys, name)
+
+    def get_parsed(self):
+        return self.param_keys.parse_args()
