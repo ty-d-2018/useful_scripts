@@ -19,6 +19,17 @@ class Volunteer:
 
         return finish
 
+    def run_and_process(self, i, activity):
+        result = self.run_layer(i)
+        pairs = {
+            "stdout": result.stdout,
+            "stderr": result.stderr,
+        }
+        result_bl = Blocks(pairs)
+        handle = process_blocks.loop_blocks(activity)
+
+        return handle
+
 class CallingCommand:
     def __init__(self, commandMap):
         self.commands = []
