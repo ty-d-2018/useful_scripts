@@ -44,7 +44,3 @@ class Blocks:
             return True
         return False
 
-class BlocksArgument(Blocks):
-    def __init__(self, tags):
-        self.arguments = Argument(tags)
-        Blocks.__init__(self.arguments.get_parsed())
