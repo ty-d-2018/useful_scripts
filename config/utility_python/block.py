@@ -1,6 +1,6 @@
 from argument import Argument
 
-class Block:
+class Blocks:
     def __init__(self, pairs):
         self.pairs = {}
         self.k = None
