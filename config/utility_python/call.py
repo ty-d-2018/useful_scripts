@@ -10,9 +10,14 @@ class Volunteer:
         self.layers.append((activity, blocks))
 
     def run_layer(self, i):
+        finish = self.get_layer_finish(i)
+        return subprocess.run(finish, capture_output=True, text=True, check=True)
+
+    def get_layer_finish(self, i):
         activity, blocks = self.layers[i]
         finish = blocks.loop_blocks(activity.read_block)
-        return subprocess.run(finish, capture_output=True, text=True, check=True)
+
+        return finish
 
 class CallingCommand:
     def __init__(self, commandMap):
