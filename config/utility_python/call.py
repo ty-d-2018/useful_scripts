@@ -30,6 +30,14 @@ class Volunteer:
 
         return handle
 
+    def process_all_layers(self, activity):
+        handles = []
+        for i in range(0, len(self.layers)):
+            process = run_and_process(i, activity)
+            handles.append(process)
+
+        return handles
+
 class CallingCommand:
     def __init__(self, commandMap):
         self.commands = []
