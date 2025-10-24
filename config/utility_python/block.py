@@ -17,9 +17,29 @@ class Block:
             return None
         name = self.k[self.i]
         block = self.get_value(name)
+        self.increase_count()
+
+        return(name, block)
+
+    def increase_count(self):
+        if self.i >= len(self.k):
+            self.i = 0
+        else:
+            self.i = self.i + 1
+
+    def loop_blocks(self, activity):
+        name, block = self.get_block()
+        while self.i > 0:
+            activity(name, block)
+            name, block = self.get_block()
 
     def get_value(self, key):
         return self.pairs[key]
+
+    def is_empty(self):
+        if len(self.k) == 0:
+            return True
+        return False
 
 class BlockArgument(Argument):
     def __init__(self, tags):

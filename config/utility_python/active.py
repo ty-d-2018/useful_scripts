@@ -22,5 +22,5 @@ class Activity:
     def get_tags(self):
         return self.tags
 
-    def send_tags(self, argument):
-        argument.set_tags(self.get_tags())
+    def send_tags(self, resolution):
+        resolution.set_tags(self.get_tags())
