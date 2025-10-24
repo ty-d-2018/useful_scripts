@@ -10,7 +10,10 @@ class Block:
 
     def set_pair_keys(self, pair):
         self.pair = pair
-        self.k = self.pair.keys()
+        self.k = self.get_keys()
+
+    def get_keys(self):
+        return self.pair.keys()
 
     def get_block(self):
         if self.is_empty():
