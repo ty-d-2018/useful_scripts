@@ -16,7 +16,7 @@ class Activity:
     def reset_tags(self):
         self.tags = {}
 
-    def read_activity(self, name, block):
+    def read_block(self, name, block):
         print(f"I have the block named: {name}")
 
     def get_tags(self):
