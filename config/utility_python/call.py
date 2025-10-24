@@ -9,6 +9,12 @@ class Volunteer:
     def add_block_layer(self, blocks, activity):
         self.layers.append((activity, blocks))
 
+    def set_layer(self, blocks, activity, i):
+        self.layers[i] = (activity, blocks)
+
+    def get_layer(self, i):
+        return self.layers[i]
+
     def run_layer(self, i):
         finish = self.get_layer_finish(i)
         return subprocess.run(finish, capture_output=True, text=True, check=True)
