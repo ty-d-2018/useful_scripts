@@ -1,6 +1,27 @@
 from argument import Argument
 
-class Blocks(Argument):
+class Block:
+    def __init__(self, pairs):
+        self.pairs = {}
+        self.k = None
+        self.i = 0
+
+        self.set_pairs_keys(pairs)
+
+    def set_pair_keys(self, pair):
+        self.pair = pair
+        self.k = self.pair.keys()
+
+    def get_block(self):
+        if self.is_empty():
+            return None
+        name = self.k[self.i]
+        block = self.get_value(name)
+
+    def get_value(self, key):
+        return self.pairs[key]
+
+class BlockArgument(Argument):
     def __init__(self, tags):
         super().__init__(tags)
         self.pArgs = self.get_parsed()
