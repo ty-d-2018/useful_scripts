@@ -17,7 +17,7 @@ class Activity:
         self.tags = {}
 
     def read_block(self, name, block):
-        print(f"I have the block named: {name}")
+        return f"I have the block named: {name}"
 
     def get_tags(self):
         return self.tags

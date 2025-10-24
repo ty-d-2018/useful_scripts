@@ -1,8 +1,18 @@
 import subprocess
+from block.py import Blocks
+from active.py import Activity
 
-class CallingCommand:
+class Volunteer:
     def __init__(self):
-        pass
+        self.layers = []
+
+    def add_block_layer(self, blocks, activity):
+        self.layers.append((activity, blocks))
+
+    def run_layer(self, i):
+        activity, blocks = self.layers[i]
+        finish = blocks.loop_blocks(activity.read_block)
+        return subprocess.run(finish, capture_output=True, text=True, check=True)
 
 class CallingCommand:
     def __init__(self, commandMap):
