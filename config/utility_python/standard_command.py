@@ -80,3 +80,6 @@ class CommandCenter:
     def add_command(self, routine_key):
         command_blck = self.create_command(routine_key)
         self.command_blocks.append(command_blck)
+
+    def get_command(self, i):
+        return self.command_blocks[i]
