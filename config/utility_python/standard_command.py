@@ -32,7 +32,7 @@ class TemplateActivity(Activity):
         self.set_keys()
 
     def read_block(self, name, block):
-        blocks = self.template.get_value(self.keys[name])
+        blocks.set_value(self.template.get_value(self.keys[name]))
 
 class CommandBlock(Blocks):
     def __init__(self):
@@ -43,7 +43,12 @@ class CommandBlock(Blocks):
         command_pairs = {}
         for argument in options:
             value = self.create_value(argument["value"])
-            commnad_pairs[argument["arg"]] = value
+            key = argument["arg"]
+            if len(key) == 1:
+                key = f"-{key}"
+            else:
+                key = f"--{key}"
+            commnad_pairs[key] = value
         
         self.set_pair_keys(command_pairs)
 
