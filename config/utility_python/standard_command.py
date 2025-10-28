@@ -1,3 +1,5 @@
+from block.py import Blocks
+from active.py import Activity
 
 
 class CommandBlock(Blocks):
