@@ -1,4 +1,5 @@
 from active.py import Activity
+from template.py import Template
 
 class RenderFrame(Activity):
     def __init__(self):
