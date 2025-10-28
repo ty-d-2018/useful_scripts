@@ -23,10 +23,10 @@ class Template:
         self.tags = []
 
     def add_row(self, subject, value):
-        self.tags.append((subject, value))
+        self.tags.append([subject, value])
 
     def set_row(self, i, subject, value):
-        self.tags[i] = (subject, value)
+        self.tags[i] = [subject, value]
 
     def get_column(self, column_name):
         columns = []
@@ -53,3 +53,7 @@ class Template:
 
     def get_subject(self, r):
         return self.template[r][0]
+
+    def set_all_values(self, literal_values):
+        for i in range(0, len(self.tags)):
+            self.tags[i][1] = literal_values[i]
