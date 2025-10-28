@@ -1,0 +1,19 @@
+{
+    "render-frame":{
+        "command-name": "blender",
+        "options": [
+            {
+                "arg": "background",
+                "value": "#FILENAME"
+            },
+            {
+                "arg": "render-frame",
+                "value": "#NUMBER"
+            },
+            {
+                "arg": "render-output",
+                "value": "#DIRECTORY"
+            }
+        ]
+    }
+}

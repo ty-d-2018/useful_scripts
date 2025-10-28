@@ -1,0 +1,6 @@
+{
+    "create-ssh":{
+        "command-name": "ssh-keygen",
+        "options": []
+    }
+}

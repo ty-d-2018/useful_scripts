@@ -59,3 +59,24 @@ class CommandBlock(Blocks):
             return Value(possible_values[value_string])
         else:
             return None
+
+class CommandCenter:
+    def __init__(self, json_object):
+        self.command_blocks = []
+        self.json_object = json_object
+
+    def create_command(self, routine_key):
+        sub_json_object = self.json_object[routine_key]
+
+        command_blck = CommandBlock()
+        command_blck.to_pairs(sub_json_object)
+        
+        return command_blck
+
+    def set_command(self, i, routine_key):
+        command_blck = self.create_command(routine_key)
+        self.command_blocks[i] = command_blck
+
+    def add_command(self, routine_key):
+        command_blck = self.create_command(routine_key)
+        self.command_blocks.append(command_blck)
