@@ -57,3 +57,6 @@ class Template:
     def set_all_values(self, literal_values):
         for i in range(0, len(self.tags)):
             self.tags[i][1] = literal_values[i]
+
+    def set_value(self, i, literal_value):
+        self.tags[i][1].set_value(literal_value)
