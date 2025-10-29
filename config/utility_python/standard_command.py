@@ -6,7 +6,8 @@ def create_map():
     arg_map = {
         "#FILENAME": "file-path",
         "#NUMBER": "numerial",
-        "#DIRECTORY": "directory-path"
+        "#DIRECTORY": "directory-path",
+        "#CHARACTERS": "text"
     }
 
     return arg_map
