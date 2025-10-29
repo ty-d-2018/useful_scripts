@@ -3,7 +3,11 @@
         "command-name": "ssh-keygen",
         "options": [
             {
-                "arg": "-t",
+                "arg": "t",
+                "value": "#CHARACTERS"
+            },
+            {
+                "arg": "C",
                 "value": "#CHARACTERS"
             }
         ]
