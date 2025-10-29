@@ -18,6 +18,9 @@ class ReadFile:
 
         return False
 
+    def get_file_string(self):
+        return str(self.file_path)
+
 class ReadJson(ReadFile):
     def __init__(self, file_path_str):
         super().__init__(file_path_str)
