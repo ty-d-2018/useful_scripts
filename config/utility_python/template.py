@@ -23,10 +23,18 @@ class Template:
         self.tags = []
 
     def add_row(self, subject, value):
-        self.tags.append([subject, value])
+        value_wrapper = self.create_a_value("unknown")
+        self.tags.append([subject, value_wrapper])
+
+    def create_a_value(self, name, value):
+        value_wrapper = Value(name)
+        value_wrapper.set_value(value)
+
+        return value_wrapper
 
     def set_row(self, i, subject, value):
-        self.tags[i] = [subject, value]
+        value_wrapper = self.create_a_value("uknown")
+        self.tags[i] = [subject, value_wrapper]
 
     def get_column(self, column_name):
         columns = []
@@ -56,7 +64,7 @@ class Template:
 
     def set_all_values(self, literal_values):
         for i in range(0, len(self.tags)):
-            self.tags[i][1] = literal_values[i]
+            self.tags[i][1].set_value(literal_values[i])
 
     def set_value(self, i, literal_value):
         self.tags[i][1].set_value(literal_value)
