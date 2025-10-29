@@ -5,6 +5,7 @@ class Blocks:
         self.pairs = {}
         self.k = None
         self.i = 0
+        self.name = "block"
 
         self.set_pairs_keys(pairs)
 
@@ -43,4 +44,10 @@ class Blocks:
         if len(self.k) == 0:
             return True
         return False
+
+    def set_name(self, name):
+        self.name = name
+
+    def get_name(self):
+        return self.name
 

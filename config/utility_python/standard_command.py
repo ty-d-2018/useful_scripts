@@ -36,8 +36,9 @@ class TemplateActivity(Activity):
         blocks.set_value(self.template.get_value(self.keys[name]))
 
 class CommandBlock(Blocks):
-    def __init__(self):
+    def __init__(self, name):
         super().__init__()
+        self.set_name(name)
 
     def to_pairs(self, json_object):
         options = json_object["options"]
@@ -69,7 +70,7 @@ class CommandCenter:
     def create_command(self, routine_key):
         sub_json_object = self.json_object[routine_key]
 
-        command_blck = CommandBlock()
+        command_blck = CommandBlock(routine_key)
         command_blck.to_pairs(sub_json_object)
         
         return command_blck
@@ -84,3 +85,10 @@ class CommandCenter:
 
     def get_command(self, i):
         return self.command_blocks[i]
+
+    def match_command(self, routine_key):
+        for i in range(0, len(self.command_blocks)):
+            if self.command_blocks[i].get_name() == routine_key:
+                return i
+        
+        return -1
