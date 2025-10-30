@@ -1,16 +1,18 @@
 from pathlib import Path
 import json
 
-def create_file_path(file_path_str):
-    full_path = Path(file_path_str).resolve()
 
-class ReadFile:
+class File:
     def __init__(self, file_path_str):
-        self.file_path = create_file_path(file_path_str)
+        self.file_path = File.create_file_path(file_path_str)
         self.content = ""
+    
+    @staticmethod
+    def create_file_path(file_path_str):
+        full_path = Path(file_path_str).resolve()
 
-    def read_file(self):
-        file_content = self.file_path.read_text()
+    def file_process(self):
+        self.content = self.file_path.read_text()
     
     def is_content_empty(self):
         if self.content == "":
@@ -20,6 +22,11 @@ class ReadFile:
 
     def get_file_string(self):
         return str(self.file_path)
+
+class ReadFile(File):
+    def __init__(self, file_path_str):
+        super.__init__(file_path_str)
+        self.file_process()
 
 class ReadJson(ReadFile):
     def __init__(self, file_path_str):
@@ -31,3 +38,6 @@ class ReadJson(ReadFile):
             self.read_file()
         
         self.json_object = json.loads(self.content)
+
+class WriteFile(File):
+    def __init__(self):
