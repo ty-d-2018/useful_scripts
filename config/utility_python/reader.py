@@ -40,4 +40,9 @@ class ReadJson(ReadFile):
         self.json_object = json.loads(self.content)
 
 class WriteFile(File):
-    def __init__(self):
+    def __init__(self, file_path_str, content):
+        super.__init__(file_path_str)
+        self.content = content
+
+    def file_process(self):
+        self.file_path.write_text(self.content)
