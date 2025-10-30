@@ -16,5 +16,5 @@ class RenderFrame:
     def setup_command_block(self):
         self.command_center.add_command(self.routine_key)
         subjects = ["background", "render-frame", "render-output"]
-        values = []
-        self.template_activity.set_keys_and_table()
+        values = [self.blend_file.get_file_string(), 1, self.render_path.get_file_string()]
+        self.template_activity.set_keys_and_table(subjects, values)
