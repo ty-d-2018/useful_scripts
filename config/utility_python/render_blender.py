@@ -18,3 +18,6 @@ class RenderFrame:
         subjects = ["background", "render-frame", "render-output"]
         values = [self.blend_file.get_file_string(), 1, self.render_path.get_file_string()]
         self.template_activity.set_keys_and_table(subjects, values)
+
+    def activity_block(self):
+        pass
