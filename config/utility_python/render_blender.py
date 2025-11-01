@@ -2,6 +2,15 @@ from standard_command.py import TemplateActivity, CommandBlock
 
 from reader.py import ReadJson, ReadFile, create_file_path
 from call.py import Volunteer
+from active.py import Activity
+
+class RenderActivity(Activity):
+    def __init__(self):
+        super.__init__("Blender Render CLI")
+
+    def read_block(self, name, block):
+        pass
+
 
 class RenderFrame:
     def __init__(self, json_src_file, blend_src_file, render_ouput_file):
@@ -20,4 +29,5 @@ class RenderFrame:
         self.template_activity.set_keys_and_table(subjects, values)
 
     def activity_block(self):
-        pass
+        command_blocks = self.command_center.get_command(0)
+        command_blocks.loop_blocks(self.template_activity.read_block)

@@ -25,6 +25,7 @@ class Volunteer:
 
         return finish
 
+    # Run activity on the results from the subprocess thread
     def run_and_process(self, i, activity):
         result = self.run_layer(i)
         pairs = {
@@ -36,6 +37,7 @@ class Volunteer:
 
         return handle
 
+    # Running run_and_process() for ever layer
     def process_all_layers(self, activity):
         handles = []
         for i in range(0, len(self.layers)):
