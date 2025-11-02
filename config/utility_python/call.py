@@ -10,6 +10,9 @@ class VolunteerActivity:
     def get_list(self):
         return self.options
 
+    def clear(self):
+        self.options = []
+
 
 class Volunteer:
     def __init__(self):
@@ -27,6 +30,13 @@ class Volunteer:
     def run_layer(self, i):
         finish = self.get_layer_finish(i)
         return subprocess.run(finish, capture_output=True, text=True, check=True)
+
+    def run_all_layers(self):
+        results = []
+        for i in range(0, len(self.layers)):
+            result.append(self.run_layer(i))
+
+        return results
 
     # Activity needs to return a list
     def get_layer_finish(self, i):

@@ -22,6 +22,7 @@ class RenderFrame:
         self.command_center = CommandCenter(self.reader.get_json())
         self.routine_key = "render-frame"
         self.volunteer = Volunteer()
+        self.render_activity = RenderActivity()
 
     def setup_command_block(self):
         self.command_center.add_command(self.routine_key)
@@ -32,3 +33,9 @@ class RenderFrame:
     def activity_block(self):
         command_blocks = self.command_center.get_command(0)
         command_blocks.loop_blocks(self.template_activity.read_block)
+        self.volunteer.add_block_layer(command_blocks, self.render_activity)
+
+    def run_render(self):
+        results = self.volunteer.run_all_layers()
+        for r in results:
+            print(r.stdout)
