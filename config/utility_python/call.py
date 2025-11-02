@@ -2,6 +2,11 @@ import subprocess
 from block.py import Blocks
 from active.py import Activity
 
+class VolunteerActivity:
+    def __init__(self, name):
+        super.__init__(name)
+
+
 class Volunteer:
     def __init__(self):
         self.layers = []

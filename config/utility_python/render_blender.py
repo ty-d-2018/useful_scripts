@@ -7,9 +7,11 @@ from active.py import Activity
 class RenderActivity(Activity):
     def __init__(self):
         super.__init__("Blender Render CLI")
+        options = []
 
     def read_block(self, name, block):
-        pass
+        options.append(name)
+        options.append(block)
 
 
 class RenderFrame:
