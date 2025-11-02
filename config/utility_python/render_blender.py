@@ -1,13 +1,12 @@
 from standard_command.py import TemplateActivity, CommandBlock
 
 from reader.py import ReadJson, ReadFile, create_file_path
-from call.py import Volunteer
+from call.py import Volunteer, VolunteerActivity
 from active.py import Activity
 
-class RenderActivity(Activity):
+class RenderActivity(VolunteerActivity):
     def __init__(self):
         super.__init__("Blender Render CLI")
-        options = []
 
     def read_block(self, name, block):
         options.append(name)

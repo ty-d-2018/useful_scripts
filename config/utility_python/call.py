@@ -5,6 +5,10 @@ from active.py import Activity
 class VolunteerActivity:
     def __init__(self, name):
         super.__init__(name)
+        self.options = []
+
+    def get_list(self):
+        return self.options
 
 
 class Volunteer:
