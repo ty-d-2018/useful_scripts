@@ -49,4 +49,4 @@ def get_render_directory():
 blender_file = get_blender_file()
 render_directory = get_render_directory()
 render_file_name = "tester"
-launch(Path.cwd(), )
+launch(blender_file, render_directory, render_file_name)
