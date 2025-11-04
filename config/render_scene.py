@@ -1,6 +1,8 @@
+from pathlib import Path
+
 from utility_python.render_python import RenderFrame
 from utility_python.reader import File
-from pathlib import Path
+from utility_python.argument import Argument
 
 def create_render_frame(json_src_file, blend_src_file, render_output_file):
     render_frame = RenderFrame(json_src_file, blender_src_file, render_output_file)
@@ -32,3 +34,19 @@ def launch(blender_file_path, render_directory, render_file_name):
 
     render_frame = create_render_frame(json_path, blender_file_src, render_output_file)
     run_render(render_frame)
+
+
+def get_blender_file():
+    tags = {
+        "--bfile": str,
+    }
+    arg = Argument(tags)
+    return arg.get_option("--bfile")
+
+def get_render_directory():
+    return "render-frames"
+
+blender_file = get_blender_file()
+render_directory = get_render_directory()
+render_file_name = "tester"
+launch(Path.cwd(), )
