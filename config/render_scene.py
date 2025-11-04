@@ -15,9 +15,8 @@ def get_json_file_string(file_name):
 
 def create_file_path(file_path):
     file = File(file_path)
-    file_str = file.get_file_string()
 
-    return file_str
+    return file
 
 def run_render(render_frame):
     render_frame.activity_block()
@@ -26,7 +25,8 @@ def run_render(render_frame):
 
 def launch(blender_file_path, render_directory, render_file_name):
     json_path = get_json_file_string("blender.json")
-    blender_file = create_file_path(blender_file_path)
+    blender_src_file = create_file_path(blender_file_path).get_file_string()
     render_output_file = create_file_path(render_directory).travel_and_get_file(render_file_name).get_file_string()
-    render_frame = create_render_frame()
+
+    render_frame = create_render_frame(json_path, blender_file_src, render_output_file)
     run_render(render_frame)
