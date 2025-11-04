@@ -23,6 +23,27 @@ class File:
     def get_file_string(self):
         return str(self.file_path)
 
+    def get_parent_file_string(self):
+        return str(self.file_path.parent)
+
+    def get_parent_directory(self):
+        file = File(self.get_parent_file_string())
+
+        return file
+
+    def get_file_path(self):
+        return self.file_path
+
+    def travel_and_get_file(sub_path):
+        file = self.get_parent_directory()
+        file_path = file.get_file_path()
+        new_path = file_path / sub_path
+
+        sub_file = File(str(new_path))
+
+        return sub_file
+
+
 class ReadFile(File):
     def __init__(self, file_path_str):
         super.__init__(file_path_str)
