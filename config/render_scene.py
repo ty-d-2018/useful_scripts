@@ -7,6 +7,8 @@ def create_render_frame(json_src_file, blend_src_file, render_output_file):
     
     render_frame.setup_command_block()
 
+    return render_frame
+
 def get_json_file_string(file_name):
     file = File(__file__)
     file = file.travel_and_get_file(file_name)
