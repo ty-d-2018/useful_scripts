@@ -37,6 +37,9 @@ class Blocks:
             activity(name, block)
             name, block = self.get_block()
 
+    def loop_set(self, activity):
+        activity(self)
+
     def get_value(self, key):
         return self.pairs[key]
 
