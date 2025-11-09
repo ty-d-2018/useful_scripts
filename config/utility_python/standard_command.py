@@ -1,6 +1,6 @@
 from config.utility_python.block import Blocks
 from config.utility_python.active import Activity
-from config.utility_python.template import Template
+from config.utility_python.template import Template, Value
 
 def create_map():
     arg_map = {
