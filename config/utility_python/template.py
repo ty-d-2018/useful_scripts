@@ -23,7 +23,7 @@ class Template:
         self.tags = []
 
     def add_row(self, subject, value):
-        value_wrapper = self.create_a_value("unknown")
+        value_wrapper = self.create_a_value("unknown", value)
         self.tags.append([subject, value_wrapper])
 
     def create_a_value(self, name, value):
