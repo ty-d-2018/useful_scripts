@@ -50,7 +50,7 @@ class CommandBlock(Blocks):
                 key = f"-{key}"
             else:
                 key = f"--{key}"
-            commnad_pairs[key] = value
+            command_pairs[key] = value
         
         self.set_pair_keys(command_pairs)
 
