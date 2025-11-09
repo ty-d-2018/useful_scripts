@@ -7,7 +7,7 @@ class Blocks:
         self.i = 0
         self.name = "block"
 
-        self.set_pairs_keys(pairs)
+        self.set_pair_keys(pairs)
 
     def set_pair_keys(self, pair):
         self.pair = pair
