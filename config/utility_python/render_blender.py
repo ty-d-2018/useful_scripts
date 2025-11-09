@@ -14,7 +14,7 @@ class RenderActivity(VolunteerActivity):
 
 
 class RenderFrame:
-    def __init__(self, json_src_file, blend_src_file, render_ouput_file):
+    def __init__(self, json_src_file, blend_src_file, render_output_file):
         self.reader = ReadJson(json_src_file)
         self.blend_file = BinaryFile(blend_src_file)
         self.render_path = ReadFile(render_output_file)
