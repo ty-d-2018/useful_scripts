@@ -47,7 +47,7 @@ class File:
 
 class ReadFile(File):
     def __init__(self, file_path_str):
-        super.__init__(file_path_str)
+        super().__init__(file_path_str)
         self.file_process()
 
 class ReadJson(ReadFile):
