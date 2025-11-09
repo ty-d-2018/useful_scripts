@@ -2,7 +2,7 @@ import subprocess
 from config.utility_python.block import Blocks
 from config.utility_python.active import Activity
 
-class VolunteerActivity:
+class VolunteerActivity(Activity):
     def __init__(self, name):
         super().__init__(name)
         self.options = []
