@@ -6,7 +6,7 @@ from config.utility_python.active import Activity
 
 class RenderActivity(VolunteerActivity):
     def __init__(self):
-        super.__init__("Blender Render CLI")
+        super().__init__("Blender Render CLI")
 
     def read_block(self, name, block):
         options.append(name)

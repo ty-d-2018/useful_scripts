@@ -4,7 +4,7 @@ from config.utility_python.active import Activity
 
 class VolunteerActivity:
     def __init__(self, name):
-        super.__init__(name)
+        super().__init__(name)
         self.options = []
 
     def get_list(self):

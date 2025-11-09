@@ -75,7 +75,7 @@ class ReadJson(ReadFile):
 
 class WriteFile(File):
     def __init__(self, file_path_str, content):
-        super.__init__(file_path_str)
+        super().__init__(file_path_str)
         self.content = content
 
     def file_process(self):
