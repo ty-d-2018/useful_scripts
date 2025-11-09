@@ -23,10 +23,9 @@ class TemplateActivity(Activity):
             self.template.add_row(subjects[i], values[i])
 
     def set_keys(self):
-        arg_map = {}
         column = self.template.get_column("subject")
         for i in range(0, len(column)):
-            self.arg_map[column[i]] = i
+            self.keys[column[i]] = i
 
     def set_keys_and_table(self, subjects, values):
         self.set_table(subjects, values)
