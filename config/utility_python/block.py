@@ -11,7 +11,7 @@ class Blocks:
 
     def set_pair_keys(self, pair):
         self.pair = pair
-        self.k = self.get_keys()
+        self.k = list(self.get_keys())
 
     def get_keys(self):
         return self.pair.keys()
