@@ -1,6 +1,3 @@
-import sys
-print(sys.path)
-
 from pathlib import Path
 
 from config.utility_python.render_blender import RenderFrame
