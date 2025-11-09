@@ -20,7 +20,7 @@ class TemplateActivity(Activity):
 
     def set_table(self, subjects, values):
         for i in range(0, len(subjects)):
-            template.add_row(subjects[i], values[i])
+            self.template.add_row(subjects[i], values[i])
 
     def set_keys(self):
         arg_map = {}
