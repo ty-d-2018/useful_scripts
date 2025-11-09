@@ -13,7 +13,6 @@ class File:
         return full_path
 
     def file_process(self):
-        print(f"file path is: {str(self.file_path)}")
         self.content = self.file_path.read_text()
     
     def is_content_empty(self):
@@ -66,12 +65,18 @@ class ReadJson(ReadFile):
     def __init__(self, file_path_str):
         super().__init__(file_path_str)
         self.json_object = None
+        self.load_json()
+
+    def load_json(self):
+        self.json_object = json.loads(self.content)
 
     def get_json(self):
         if self.is_content_empty():
-            self.read_file()
+            self.file_process()
+            self.load_json()
+
+        return self.json_object
         
-        self.json_object = json.loads(self.content)
 
 class WriteFile(File):
     def __init__(self, file_path_str, content):
