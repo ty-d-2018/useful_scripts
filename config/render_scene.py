@@ -4,7 +4,7 @@ from config.utility_python.render_blender import RenderFrame
 from config.utility_python.reader import File
 from config.utility_python.argument import Argument
 
-def create_render_frame(json_src_file, blend_src_file, render_output_file):
+def create_render_frame(json_src_file, blender_src_file, render_output_file):
     render_frame = RenderFrame(json_src_file, blender_src_file, render_output_file)
     
     render_frame.setup_command_block()
@@ -32,7 +32,7 @@ def launch(blender_file_path, render_directory, render_file_name):
     blender_src_file = create_file_path(blender_file_path).get_file_string()
     render_output_file = create_file_path(render_directory).travel_and_get_file(render_file_name).get_file_string()
 
-    render_frame = create_render_frame(json_path, blender_file_src, render_output_file)
+    render_frame = create_render_frame(json_path, blender_src_file, render_output_file)
     run_render(render_frame)
 
 
