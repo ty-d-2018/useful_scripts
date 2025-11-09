@@ -32,7 +32,7 @@ class TemplateActivity(Activity):
         self.set_keys()
 
     def read_block(self, name, block):
-        blocks.set_value(self.template.get_value(self.keys[name]))
+        blocks.set_value(self.template.get_value(name))
 
 class CommandBlock(Blocks):
     def __init__(self, name):

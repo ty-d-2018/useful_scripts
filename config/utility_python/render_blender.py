@@ -27,6 +27,7 @@ class RenderFrame:
     def setup_command_block(self):
         self.command_center.add_command(self.routine_key)
         subjects = ["background", "render-frame", "render-output"]
+        self.setup_subjects(subjects)
         values = [self.blend_file.get_file_string(), 1, self.render_path.get_file_string()]
         self.template_activity.set_keys_and_table(subjects, values)
 
@@ -39,3 +40,10 @@ class RenderFrame:
         results = self.volunteer.run_all_layers()
         for r in results:
             print(r.stdout)
+
+    def setup_subjects(self, subjects):
+        for i in range(0, len(subjects)):
+            if len(subjects[i]) > 1:
+                subjects[i] = f"--{subjects[i]}"
+            else:
+                subjects[i] = f"-{subjects[i]}"
