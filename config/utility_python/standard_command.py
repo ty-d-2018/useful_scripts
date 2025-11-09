@@ -57,8 +57,8 @@ class CommandBlock(Blocks):
     def create_value(self, value_str):
         possible_values = create_map()
 
-        if value_string in possible_values:
-            return Value(possible_values[value_string])
+        if value_str in possible_values:
+            return Value(possible_values[value_str])
         else:
             return None
 
