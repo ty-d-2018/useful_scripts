@@ -46,9 +46,9 @@ def get_blender_file():
 def get_render_directory():
     return "render-frames"
 
-"""blender_file = get_blender_file()
+blender_file = get_blender_file()
 render_directory = get_render_directory()
 render_file_name = "tester"
-launch(blender_file, render_directory, render_file_name)"""
+launch(blender_file, render_directory, render_file_name)
 
 print("Hello James! Ready to bug test?")
