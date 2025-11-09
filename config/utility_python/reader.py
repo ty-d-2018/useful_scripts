@@ -54,6 +54,10 @@ class ReadFile(File):
 class BinaryFile(File):
     def __init__(self, file_path_str):
         super().__init__(file_path_str)
+    
+    @staticmethod
+    def create_file_path(file_path_str):
+        full_path = Path(file_path_str).resolve(strict=False)
 
     def file_process(self):
         pass

@@ -17,7 +17,7 @@ class RenderFrame:
     def __init__(self, json_src_file, blend_src_file, render_output_file):
         self.reader = ReadJson(json_src_file)
         self.blend_file = BinaryFile(blend_src_file)
-        self.render_path = ReadFile(render_output_file)
+        self.render_path = BinaryFile(render_output_file)
         self.template_activity = TemplateActivity()
         self.command_center = CommandCenter(self.reader.get_json())
         self.routine_key = "render-frame"
