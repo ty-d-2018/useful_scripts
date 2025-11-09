@@ -1,4 +1,4 @@
-from config.utility_python.standard_command import TemplateActivity, CommandBlock
+from config.utility_python.standard_command import TemplateActivity, CommandBlock, CommandCenter
 
 from config.utility_python.reader import ReadJson, ReadFile, BinaryFile
 from config.utility_python.call import Volunteer, VolunteerActivity
