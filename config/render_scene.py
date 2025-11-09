@@ -41,7 +41,7 @@ def get_blender_file():
         "--bfile": str,
     }
     arg = Argument(tags)
-    return arg.get_option("--bfile")
+    return arg.get_option("bfile")
 
 def get_render_directory():
     return "render-frames"

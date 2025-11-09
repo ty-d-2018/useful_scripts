@@ -10,6 +10,7 @@ class File:
     @staticmethod
     def create_file_path(file_path_str):
         full_path = Path(file_path_str).resolve()
+        return full_path
 
     def file_process(self):
         self.content = self.file_path.read_text()
@@ -34,7 +35,7 @@ class File:
     def get_file_path(self):
         return self.file_path
 
-    def travel_and_get_file(sub_path):
+    def travel_and_get_file(self, sub_path):
         file = self.get_parent_directory()
         file_path = file.get_file_path()
         new_path = file_path / sub_path

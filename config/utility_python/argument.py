@@ -7,7 +7,7 @@ class Argument:
 
     def get_option(self, name):
         argParse = self.get_parsed()
-        option_value = getattr(self.argParse, name)
+        option_value = getattr(argParse, name)
         return option_value
 
     def get_parsed(self):
