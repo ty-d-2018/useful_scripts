@@ -1,4 +1,4 @@
-from argument import Argument
+from config.utility_python.argument import Argument
 
 class Blocks:
     def __init__(self, pairs={}):

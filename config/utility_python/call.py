@@ -1,6 +1,6 @@
 import subprocess
-from block.py import Blocks
-from active.py import Activity
+from config.utility_python.block import Blocks
+from config.utility_python.active import Activity
 
 class VolunteerActivity:
     def __init__(self, name):

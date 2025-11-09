@@ -1,8 +1,11 @@
+import sys
+print(sys.path)
+
 from pathlib import Path
 
-from config.utility_python.render_python import RenderFrame
-from utility_python.reader import File
-from utility_python.argument import Argument
+from config.utility_python.render_blender import RenderFrame
+from config.utility_python.reader import File
+from config.utility_python.argument import Argument
 
 def create_render_frame(json_src_file, blend_src_file, render_output_file):
     render_frame = RenderFrame(json_src_file, blender_src_file, render_output_file)

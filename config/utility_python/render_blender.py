@@ -1,8 +1,8 @@
-from standard_command.py import TemplateActivity, CommandBlock
+from config.utility_python.standard_command import TemplateActivity, CommandBlock
 
-from reader.py import ReadJson, ReadFile, create_file_path
-from call.py import Volunteer, VolunteerActivity
-from active.py import Activity
+from config.utility_python.reader import ReadJson, ReadFile, create_file_path
+from config.utility_python.call import Volunteer, VolunteerActivity
+from config.utility_python.active import Activity
 
 class RenderActivity(VolunteerActivity):
     def __init__(self):
