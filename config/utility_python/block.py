@@ -19,6 +19,7 @@ class Blocks:
     def get_block(self):
         if self.is_empty():
             return None
+        print(f"i is at {self.i}")
         name = self.k[self.i]
         block = self.get_value(name)
         self.increase_count()
@@ -26,16 +27,15 @@ class Blocks:
         return(name, block)
 
     def increase_count(self):
-        if self.i >= len(self.k):
+        if self.i >= (self.get_key_size() - 1):
             self.i = 0
         else:
             self.i = self.i + 1
 
     def loop_blocks(self, activity):
-        name, block = self.get_block()
-        while self.i > 0:
-            activity(name, block)
+        for indexElement in range(0, self.get_key_size()):
             name, block = self.get_block()
+            activity(name, block)
 
     def loop_set(self, activity):
         activity(self)
@@ -53,4 +53,7 @@ class Blocks:
 
     def get_name(self):
         return self.name
+
+    def get_key_size(self):
+        return len(self.k)
 
