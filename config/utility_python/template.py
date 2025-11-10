@@ -52,15 +52,15 @@ class Template:
         return columns
 
     def get_row(self, i):
-        row = [self.template[i][0], self.template[i][1]]
+        row = [self.tags[i][0], self.tags[i][1]]
 
         return row
 
     def get_value(self, r):
-        return self.template[r][1]
+        return self.tags[r][1]
 
     def get_subject(self, r):
-        return self.template[r][0]
+        return self.tags[r][0]
 
     def set_all_values(self, literal_values):
         for i in range(0, len(self.tags)):
