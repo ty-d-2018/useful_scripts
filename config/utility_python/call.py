@@ -34,7 +34,7 @@ class Volunteer:
     def run_all_layers(self):
         results = []
         for i in range(0, len(self.layers)):
-            result.append(self.run_layer(i))
+            results.append(self.run_layer(i))
 
         return results
 
