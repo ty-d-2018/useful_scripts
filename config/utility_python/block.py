@@ -20,11 +20,14 @@ class Blocks:
         if self.is_empty():
             return None
         print(f"i is at {self.i}")
-        name = self.road[self.i]
+        name = self.get_sequence()[self.i]
         block = self.get_value(name)
         self.increase_count()
 
         return(name, block)
+
+    def get_sequence(self):
+        return self.road
 
     def increase_count(self):
         if self.i >= (self.get_key_size() - 1):
@@ -40,11 +43,14 @@ class Blocks:
     def loop_set(self, activity):
         activity(self)
 
+    def loop_order(self, activity):
+        activity(self.road)
+
     def get_value(self, key):
         return self.pairs[key]
 
     def is_empty(self):
-        if len(self.road) == 0:
+        if len(self.get_sequence()) == 0:
             return True
         return False
 
@@ -55,5 +61,5 @@ class Blocks:
         return self.name
 
     def get_key_size(self):
-        return len(self.road)
+        return len(self.get_sequence())
 
