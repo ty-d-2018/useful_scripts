@@ -3,7 +3,7 @@ from config.utility_python.argument import Argument
 class Blocks:
     def __init__(self, pairs={}):
         self.pairs = {}
-        self.k = None
+        self.road = None
         self.i = 0
         self.name = "block"
 
@@ -11,7 +11,7 @@ class Blocks:
 
     def set_pair_keys(self, pair):
         self.pairs = pair
-        self.k = list(self.get_keys())
+        self.road = list(self.get_keys())
 
     def get_keys(self):
         return self.pairs.keys()
@@ -20,7 +20,7 @@ class Blocks:
         if self.is_empty():
             return None
         print(f"i is at {self.i}")
-        name = self.k[self.i]
+        name = self.road[self.i]
         block = self.get_value(name)
         self.increase_count()
 
@@ -44,7 +44,7 @@ class Blocks:
         return self.pairs[key]
 
     def is_empty(self):
-        if len(self.k) == 0:
+        if len(self.road) == 0:
             return True
         return False
 
@@ -55,5 +55,5 @@ class Blocks:
         return self.name
 
     def get_key_size(self):
-        return len(self.k)
+        return len(self.road)
 
