@@ -30,13 +30,13 @@ class Blocks:
         return self.road
 
     def increase_count(self):
-        if self.i >= (self.get_key_size() - 1):
+        if self.i >= (self.get_sequence_size() - 1):
             self.i = 0
         else:
             self.i = self.i + 1
 
     def loop_blocks(self, activity):
-        for indexElement in range(0, self.get_key_size()):
+        for indexElement in range(0, self.get_sequence_size()):
             name, block = self.get_block()
             activity(name, block)
 
@@ -60,6 +60,6 @@ class Blocks:
     def get_name(self):
         return self.name
 
-    def get_key_size(self):
+    def get_sequence_size(self):
         return len(self.get_sequence())
 
