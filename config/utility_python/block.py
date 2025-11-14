@@ -43,8 +43,8 @@ class Blocks:
     def loop_set(self, activity):
         activity(self)
 
-    def loop_order(self, activity):
-        activity(self.road)
+    def loop_sequence(self, activity):
+        activity(self.get_sequence())
 
     def get_value(self, key):
         return self.pairs[key]
