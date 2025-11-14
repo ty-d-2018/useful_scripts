@@ -41,18 +41,7 @@ class CommandBlock(Blocks):
         self.set_name(name)
 
     def to_pairs(self, json_object):
-        options = json_object["options"]
-        command_pairs = {}
-        for argument in options:
-            value = self.create_value(argument["value"])
-            key = argument["arg"]
-            if len(key) == 1:
-                key = f"-{key}"
-            else:
-                key = f"--{key}"
-            command_pairs[key] = value
-        
-        self.set_pair_keys(command_pairs)
+        pass
 
     def create_value(self, value_str):
         possible_values = create_map()
