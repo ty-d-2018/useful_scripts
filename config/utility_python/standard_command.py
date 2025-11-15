@@ -12,28 +12,39 @@ def create_map():
 
     return arg_map
 
-class TemplateActivity(Activity):
-    def __init__(self):
+class AcitvateCommand(Activity):
+    def __init__(self, values):
         super().__init__("template-activity")
-        self.template = Template()
-        self.keys = {}
+        self.values = values
+        self.options = []
+        self.count = 0
 
-    def set_table(self, subjects, values):
-        for i in range(0, len(subjects)):
-            self.template.add_row(subjects[i], values[i])
+    def increment_count(self):
+        current_count = self.get_count()
+        if current_count >= (self.get_size() - 1):
+            self.set_count(0)
+        else:
+            self.set_count(current_count + 1)
 
-    def set_keys(self):
-        column = self.template.get_column("subject")
-        for i in range(0, len(column)):
-            self.keys[column[i]] = i
+    def get_size(self):
+        return len(self.values)
 
-    def set_keys_and_table(self, subjects, values):
-        self.set_table(subjects, values)
-        self.set_keys()
+    def get_count(self):
+        return self.count
+
+    def set_count(self, i):
+        self.count = i
+
+    def get_value(self, i):
+        return self.values[i]
 
     def read_block(self, name, block):
-        indice = self.keys[name]
-        block.set_value(self.template.get_value(indice))
+        argument = ""
+        if len(name) == 1:
+            argument = f"-{name}"
+        else:
+            argument = f"--{name}"
+        self.options.append(name)
 
 class CommandBlock(Blocks):
     def __init__(self, name):
