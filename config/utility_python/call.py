@@ -3,8 +3,8 @@ from config.utility_python.block import Blocks
 from config.utility_python.active import Activity
 
 class VolunteerActivity(Activity):
-    def __init__(self, name):
-        super().__init__(name)
+    def __init__(self):
+        super().__init__("Volunteer-Activity")
         self.current_command = []
         self.results = []
 

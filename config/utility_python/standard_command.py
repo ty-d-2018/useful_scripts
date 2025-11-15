@@ -53,9 +53,9 @@ class AcitvateCommand(Activity):
             
 
 class CommandBlock(Blocks):
-    def __init__(self, name):
+    def __init__(self):
         super().__init__()
-        self.set_name(name)
+        self.set_name("Command-Block")
 
     def to_pairs(self, json_object):
         options = json_object["options"]

@@ -1,4 +1,4 @@
-from config.utility_python.standard_command import TemplateActivity, CommandBlock, CommandCenter
+from config.utility_python.standard_command import ActivateCommand, CommandBlock
 
 from config.utility_python.reader import ReadJson, ReadFile, BinaryFile
 from config.utility_python.call import Volunteer, VolunteerActivity
@@ -15,21 +15,42 @@ class RenderActivity(VolunteerActivity):
 
 class RenderFrame:
     def __init__(self, json_src_file, blend_src_file, render_output_file):
-        self.reader = ReadJson(json_src_file)
+        self.json_reader = ReadJson(json_src_file)
         self.blend_file = BinaryFile(blend_src_file)
         self.render_path = BinaryFile(render_output_file)
-        self.template_activity = TemplateActivity()
-        self.command_center = CommandCenter(self.reader.get_json())
         self.routine_key = "render-frame"
         self.volunteer = Volunteer()
-        self.render_activity = RenderActivity()
+        self.volunteer_activity = VolunteerActivity()
+        self.command_block = CommandBlock()
+        self.render_activity = VolunteerActivity()
+        self.activate_command = None
 
-    def setup_command_block(self):
-        self.command_center.add_command(self.routine_key)
-        subjects = ["background", "render-frame", "render-output"]
-        self.setup_subjects(subjects)
-        values = [self.blend_file.get_file_string(), 1, self.render_path.get_file_string()]
-        self.template_activity.set_keys_and_table(subjects, values)
+    def setup_command(self):
+        json_object = self.json_reader.get_json()
+        options = (json_object["render-frame"])["options"]
+        pairs = {}
+        for option in options:
+            arg = option["arg"]
+            value = option["value"]
+            pairs[arg] = value
+        self.command_block.to_pairs(pairs)
+
+    def setup_activate_command(self):
+        values = []
+        self.values.append(self.blend_file.get_file_string())
+        self.values.append(1)
+        self.values.append(self.render_path.get_file_path())
+
+        json_object = self.json_reader.get_json()
+        command_call = json_object["render-frame"]["command-name"]
+
+        self.activate_command = ActivateCommand(values, command_call)
+
+    def transfer_to_activate_command(self):
+        self.command_block.loop_blocks(self.activate_command.read_block)
+
+    def transfer_command_to_volunteer(self):
+        self.volunteer_activity.new_command(self.activate_command)
 
     def activity_block(self):
         command_blocks = self.command_center.get_command(0)
