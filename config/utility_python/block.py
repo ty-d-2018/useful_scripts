@@ -16,6 +16,9 @@ class Blocks:
     def get_keys(self):
         return self.pairs.keys()
 
+    def get_key_list(self):
+        return list(self.get_keys())
+
     def get_block(self):
         if self.is_empty():
             return None
@@ -48,6 +51,9 @@ class Blocks:
 
     def get_value(self, key):
         return self.pairs[key]
+
+    def add_pair(self, key, value):
+        self.pairs[key] = value
 
     def is_empty(self):
         if len(self.get_sequence()) == 0:
