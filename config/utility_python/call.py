@@ -16,20 +16,19 @@ class VolunteerActivity(Activity):
 
 class Volunteer:
     def __init__(self):
-        self.layers = []
+        self.layers = {}
 
-    def add_block_layer(self, blocks, activity):
-        self.layers.append((activity, blocks))
+    def add_layer(self, command_activity):
+        self.layers.append(command_activity.give_command())
 
-    def set_layer(self, blocks, activity, i):
-        self.layers[i] = (activity, blocks)
+    def set_layer(self, command_activity):
+        self.layers[i] = command_activity.give_command()
 
     def get_layer(self, i):
         return self.layers[i]
 
     def run_layer(self, i):
-        finish = self.get_layer_finish(i)
-        return subprocess.run(finish, capture_output=True, text=True, check=True)
+        return subprocess.run(self.get_layer(i), capture_output=True, text=True, check=True)
 
     def run_all_layers(self):
         results = []
@@ -37,13 +36,6 @@ class Volunteer:
             results.append(self.run_layer(i))
 
         return results
-
-    # Activity needs to return a list
-    def get_layer_finish(self, i):
-        activity, blocks = self.layers[i]
-        finish = blocks.loop_blocks(activity.read_block)
-
-        return finish
 
     # Run activity on the results from the subprocess thread
     def run_and_process(self, i, activity):

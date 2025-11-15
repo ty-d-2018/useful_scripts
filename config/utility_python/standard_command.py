@@ -13,30 +13,26 @@ def create_map():
     return arg_map
 
 class AcitvateCommand(Activity):
-    def __init__(self, values):
+    def __init__(self, values, command_call):
         super().__init__("template-activity")
         self.values = values
         self.options = []
-        self.count = 0
-
-    def increment_count(self):
-        current_count = self.get_count()
-        if current_count >= (self.get_size() - 1):
-            self.set_count(0)
-        else:
-            self.set_count(current_count + 1)
+        self.call = command_call
 
     def get_size(self):
         return len(self.values)
-
-    def get_count(self):
-        return self.count
 
     def set_count(self, i):
         self.count = i
 
     def get_value(self, i):
         return self.values[i]
+
+    def get_option(self, i):
+        return self.options[i]
+
+    def get_command_call(self):
+        return self.call
 
     def read_block(self, name, block):
         argument = ""
@@ -45,6 +41,16 @@ class AcitvateCommand(Activity):
         else:
             argument = f"--{name}"
         self.options.append(name)
+
+    def give_command(self):
+        command_list = []
+        command_list.append(self.get_command_call())
+        for i in range(0, self.get_size()):
+            command_list.append(self.get_option(i))
+            command_list.append(self.get_value(i))
+
+        return command_list
+            
 
 class CommandBlock(Blocks):
     def __init__(self, name):
