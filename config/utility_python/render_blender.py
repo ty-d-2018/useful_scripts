@@ -39,13 +39,11 @@ class RenderFrame:
     def setup(self):
         self.setup_command()
         self.setup_activate_command()
-    
+
     def setup_command(self):
         pairs = {}
         options = self.get_options()
-        self.loop_pairs(options, pairs)
-        
-        self.command_block.to_pairs(pairs)
+        self.add_to_command_block(pairs, options)
 
     def setup_activate_command(self):
         values = []
@@ -76,12 +74,15 @@ class RenderFrame:
             value = option["value"]
             pairs[arg] = value
     
+    def add_to_command_block(self, pairs, options):
+        self.loop_pairs(options, pairs)
+        self.command_block.to_pairs(pairs)
+    
     def transfer_to_activate_command(self):
         self.command_block.loop_blocks(self.activate_command.read_block)
 
     def transfer_command_to_volunteer(self):
         self.volunteer_activity.new_command(self.activate_command)
-
 
     def run_render(self):
         results = self.volunteer.run_all_layers()
