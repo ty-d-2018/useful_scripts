@@ -1,5 +1,4 @@
 from config.utility_python.standard_command import ActivateCommand, CommandBlock
-
 from config.utility_python.reader import ReadJson, ReadFile, BinaryFile
 from config.utility_python.call import Volunteer, VolunteerActivity
 from config.utility_python.active import Activity
@@ -33,20 +32,14 @@ class RenderFrame:
     def get_json_object(self):
         return self.get_file_reader("json_fle").get_json()
 
-    def setup(self):
-        self.setup_command()
-        self.setup_activate_command()
-
     def get_options(self):
         json_object = self.get_json_object()
         return (json_object["render-frame"])["options"]
 
-    def loop_pairs(self, options, pairs):
-        for option in options:
-            arg = option["arg"]
-            value = option["value"]
-            pairs[arg] = value
-
+    def setup(self):
+        self.setup_command()
+        self.setup_activate_command()
+    
     def setup_command(self):
         pairs = {}
         options = self.get_options()
@@ -65,25 +58,32 @@ class RenderFrame:
 
         self.activate_command = ActivateCommand(values, command_call)
 
-    def transfer_to_activate_command(self):
-        self.command_block.loop_blocks(self.activate_command.read_block)
-
-    def transfer_command_to_volunteer(self):
-        self.volunteer_activity.new_command(self.activate_command)
-
-    def activity_block(self):
-        command_blocks = self.command_center.get_command(0)
-        command_blocks.loop_blocks(self.template_activity.read_block)
-        self.volunteer.add_block_layer(command_blocks, self.render_activity)
-
-    def run_render(self):
-        results = self.volunteer.run_all_layers()
-        for r in results:
-            print(r.stdout)
-
     def setup_subjects(self, subjects):
         for i in range(0, len(subjects)):
             if len(subjects[i]) > 1:
                 subjects[i] = f"--{subjects[i]}"
             else:
                 subjects[i] = f"-{subjects[i]}"
+    
+    def setup_activity_block(self):
+        command_blocks = self.command_center.get_command(0)
+        command_blocks.loop_blocks(self.template_activity.read_block)
+        self.volunteer.add_block_layer(command_blocks, self.render_activity)
+    
+    def loop_pairs(self, options, pairs):
+        for option in options:
+            arg = option["arg"]
+            value = option["value"]
+            pairs[arg] = value
+    
+    def transfer_to_activate_command(self):
+        self.command_block.loop_blocks(self.activate_command.read_block)
+
+    def transfer_command_to_volunteer(self):
+        self.volunteer_activity.new_command(self.activate_command)
+
+
+    def run_render(self):
+        results = self.volunteer.run_all_layers()
+        for r in results:
+            print(r.stdout)
