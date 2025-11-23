@@ -25,14 +25,25 @@ class RenderFrame:
         self.render_activity = VolunteerActivity()
         self.activate_command = None
 
-    def setup_command(self):
+    def setup(self):
+        self.setup_command()
+        self.setup_activate_command()
+
+    def get_options(self):
         json_object = self.json_reader.get_json()
-        options = (json_object["render-frame"])["options"]
-        pairs = {}
+        return (json_object["render-frame"])["options"]
+
+    def loop_pairs(self, options, pairs):
         for option in options:
             arg = option["arg"]
             value = option["value"]
             pairs[arg] = value
+
+    def setup_command(self):
+        pairs = {}
+        options = self.get_options()
+        self.loop_pairs(options, pairs)
+        
         self.command_block.to_pairs(pairs)
 
     def setup_activate_command(self):
