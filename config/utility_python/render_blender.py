@@ -47,14 +47,11 @@ class RenderFrame:
 
     def setup_activate_command(self):
         values = []
-        self.values.append(self.get_file_reader("blend_file").get_file_string())
-        self.values.append(1)
-        self.values.append(self.get_file_reader("output_file").get_file_path())
+        self.set_argument_values(values)
+        self.init_activate_command(values, self.get_json_object())
 
-        json_object = self.get_json_object()
-        command_call = json_object["render-frame"]["command-name"]
-
-        self.activate_command = ActivateCommand(values, command_call)
+    def init_activate_command(self, values, json_object):
+        self.activate_command = ActivateCommand(values, json_object["render-frame"]["command-name"])
 
     def setup_subjects(self, subjects):
         for i in range(0, len(subjects)):
@@ -67,7 +64,12 @@ class RenderFrame:
         command_blocks = self.command_center.get_command(0)
         command_blocks.loop_blocks(self.template_activity.read_block)
         self.volunteer.add_block_layer(command_blocks, self.render_activity)
-    
+
+    def set_argument_values(self, values):
+        self.values.append(self.get_file_reader("blend_file").get_file_string())
+        self.values.append(1)
+        self.values.append(self.get_file_reader("output_file").get_file_path())
+
     def loop_pairs(self, options, pairs):
         for option in options:
             arg = option["arg"]
