@@ -88,5 +88,8 @@ class RenderFrame:
 
     def run_render(self):
         results = self.volunteer.run_all_layers()
+        return results
+
+    def print_results(self, results):
         for r in results:
             print(r.stdout)
