@@ -15,9 +15,11 @@ class RenderActivity(VolunteerActivity):
 
 class RenderFrame:
     def __init__(self, json_src_file, blend_src_file, render_output_file):
-        self.json_reader = ReadJson(json_src_file)
-        self.blend_file = BinaryFile(blend_src_file)
-        self.render_path = BinaryFile(render_output_file)
+        self.files = {
+            "json_file": ReadJson(json_src_file),
+            "blend_file": BinaryFile(blend_src_file),
+            "output_file": BinaryFile(render_output_file)
+        }
         self.routine_key = "render-frame"
         self.volunteer = Volunteer()
         self.volunteer_activity = VolunteerActivity()
@@ -25,12 +27,18 @@ class RenderFrame:
         self.render_activity = VolunteerActivity()
         self.activate_command = None
 
+    def get_file_reader(self, key):
+        return self.files[key]
+
+    def get_json_object(self):
+        return self.get_file_reader("json_fle").get_json()
+
     def setup(self):
         self.setup_command()
         self.setup_activate_command()
 
     def get_options(self):
-        json_object = self.json_reader.get_json()
+        json_object = self.get_json_object()
         return (json_object["render-frame"])["options"]
 
     def loop_pairs(self, options, pairs):
@@ -48,11 +56,11 @@ class RenderFrame:
 
     def setup_activate_command(self):
         values = []
-        self.values.append(self.blend_file.get_file_string())
+        self.values.append(self.get_file_reader("blend_file").get_file_string())
         self.values.append(1)
-        self.values.append(self.render_path.get_file_path())
+        self.values.append(self.get_file_reader("output_file").get_file_path())
 
-        json_object = self.json_reader.get_json()
+        json_object = self.get_json_object()
         command_call = json_object["render-frame"]["command-name"]
 
         self.activate_command = ActivateCommand(values, command_call)
