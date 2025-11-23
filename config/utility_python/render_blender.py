@@ -2,6 +2,7 @@ from config.utility_python.standard_command import ActivateCommand, CommandBlock
 from config.utility_python.reader import ReadJson, ReadFile, BinaryFile
 from config.utility_python.call import Volunteer, VolunteerActivity
 from config.utility_python.active import Activity
+from config.utility_python.blender import BlenderFiles
 
 class RenderActivity(VolunteerActivity):
     def __init__(self):
@@ -14,17 +15,15 @@ class RenderActivity(VolunteerActivity):
 
 class RenderFrame:
     def __init__(self, json_src_file, blend_src_file, render_output_file):
-        self.files = {
-            "json_file": ReadJson(json_src_file),
-            "blend_file": BinaryFile(blend_src_file),
-            "output_file": BinaryFile(render_output_file)
-        }
+        self.blender_files = BlenderFiles()
         self.routine_key = "render-frame"
         self.volunteer = Volunteer()
         self.volunteer_activity = VolunteerActivity()
         self.command_block = CommandBlock()
         self.render_activity = VolunteerActivity()
         self.activate_command = None
+        
+        self.setup_blender_files(BinaryFile(blend_src_file), ReadJson(json_src_file), BinaryFile(render_output_file))
 
     def get_file_reader(self, key):
         return self.files[key]
@@ -35,6 +34,10 @@ class RenderFrame:
     def get_options(self):
         json_object = self.get_json_object()
         return (json_object["render-frame"])["options"]
+
+    def setup_blender_files(self, blender_file_handle, json_file_handle, output_file_handle):
+        self.blender_files.setup_basic_files(blender_file_handle, output_file_handle)
+        self.blender_files.insert_file("json_file", json_file_handle)
 
     def setup(self):
         self.setup_command()
