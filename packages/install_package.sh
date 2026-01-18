@@ -1,7 +1,8 @@
 #!/bin/bash
 
-package_name=$1
-pack_form=$2
+pack_form=$1
+package_name=$2
+
 
 for_snap="snappage"
 for_apt="applit"
